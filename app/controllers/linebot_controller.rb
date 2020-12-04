@@ -22,7 +22,7 @@ class LinebotController < ApplicationController
         error 400 do 'Bad Request' end
       end
       events = client.parse_events_from(body)
-      
+
       message = "test"
       message = amazon_login(message)
 
@@ -56,7 +56,7 @@ class LinebotController < ApplicationController
 
       # メールアドレス
       element = driver.find_element(:name, 'email')
-      element.send_keys "pirorin2810@gmail.coma"
+      element.send_keys ENV["EMAIL"]
       element.submit
       
       error = driver.find_element(:class, 'a-alert-content')
