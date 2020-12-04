@@ -63,20 +63,26 @@ class LinebotController < ApplicationController
 
       if error.text == "このEメールアドレスを持つアカウントが見つかりません" then
 
-        message = message + "メルアド間違えてる"
+        message = "メルアド間違えてる"
         driver.quit
         return message
       end 
 
       #パスワード
       element2 = driver.find_element(:name, 'password')
-      element2.send_keys "自分のパスワード"
+      element2.send_keys ENV["PASSWORD"]
 
       #実行キーの押下
       element2.submit
+      
+      element = driver.find_element(:id,'nav-link-accountList')
+      element.click
 
-      sleep(3)
+      sleep(2)
       driver.quit
+      message = "成功しました。"
+
+      return message
     end
 
   end
